@@ -51,7 +51,7 @@ let filterPipelineJobs = function(job) {
 };
 
 let filterFailedJobs = function(job) {
-	return job.jobs.filter(job => job.lastBuild.result !== "SUCCESS").map(job => {
+	return job.jobs.filter(job => job.lastBuild.result !== "SUCCESS" && job.lastBuild.result !== "ABORTED").map(job => {
 		const statuses = {
 			aborted: job.lastBuild.result === "ABORTED",
 			failed: job.lastBuild.result === "FAILURE",
@@ -92,7 +92,7 @@ app.get("/", (req, res) => {
 		.catch(e => console.log(e));
 });
 app.get("/json", (req, res) => {
-	fetchRawViewData().then(data => res.send(data))
+	fetchRawViewData().then(data => res.send({ ...formatData(data), app: getAppConfig() }))
 		.catch(e => console.log(e));
 });
 
