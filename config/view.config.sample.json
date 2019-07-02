@@ -1,0 +1,8 @@
+{
+	"omitNameParts": [
+		"my-job-prefix-",
+		"-pipeline"
+	],
+	"title": "My pipelines",
+	"refreshTimeout": 60
+}

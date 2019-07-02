@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Jenkins view climate</title>
+	<meta http-equiv="refresh"
+				content="{{app.refreshTimeout}}">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.min.css"
+				rel="stylesheet"
+				defer>
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700&display=swap"
+				rel="stylesheet"
+				defer>
+	<link rel="stylesheet"
+				href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css"
+				defer>
+	<link rel="stylesheet"
+				href="style.css">
+
+</head>
+
+<body>
+
+<header>
+	<h1>{{app.title}}</h1>
+	<span class="loader" style="animation-duration: {{app.refreshTimeout}}s"></span>
+</header>
+<main>
+	{{#each jobs}}
+		<section class="pipeline {{scoreClass}}">
+			<strong class="pipeline-name">
+				{{name}}
+			</strong>
+			<i class="pipeline-icon wi {{iconClass}}"></i>
+			{{#if failedJobs.length}}
+				<section class="failed-jobs">
+					{{#each failedJobs}}
+					<span class="job" data-aborted="{{aborted}}">
+						{{#if aborted}}
+						<i class="fas job-status fa-skull-crossbones aborted"></i>
+						{{/if}}
+						{{#if failed}}
+							<i class="fas job-status fa-times-circle  error"></i>
+						{{/if}}
+						{{#if ok}}
+							<i class="fas job-status fa-check-circle  error"></i>
+						{{/if}}
+						{{#if building}}
+						<i class="fas fa-sync-alt fa-spin "></i>
+						{{/if}}
+						<strong class="job-name">
+					{{displayName}}
+					</strong>
+					</span>
+					{{/each}}
+				</section>
+			{{else}}
+				<section class="builds-ok">
+				<span class="job">
+					<i class="fas fa-check-circle success"></i> <strong class="job-name">Last builds ok</strong>
+					</span>
+				</section>
+			{{/if}}
+		</section>
+	{{/each}}
+</main>
+</body>
+</html>
+

@@ -1,0 +1,24 @@
+{
+  "name": "jenkins-pipeline-climate",
+  "version": "1.0.0",
+  "description": "Display pipelines from Jenkins view in wall monitor",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "hbs": "^4.0.4",
+    "jenkins": "^0.25.0",
+    "request": "^2.88.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1",
+    "prettier": "^1.18.2"
+  }
+}

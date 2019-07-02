@@ -1,0 +1,147 @@
+
+html, body, body * {
+	all: unset;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	width: 100vw;
+	height: 100vh;
+	font: 4vmin 'Source Sans Pro', sans-serif;
+	background: #282A36;
+	color: #F8F8F2;
+}
+
+header {
+	text-align: center;
+	font-size: 0.6em;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	font-variant: small-caps;
+	background: rgba(0, 0, 0, 0.1)
+}
+
+main {
+	display: grid;
+	grid-auto-rows: auto;
+	grid-template-columns: repeat(auto-fit, minmax(30%, 1fr));
+	align-content: stretch;
+	justify-content: center;
+	grid-gap: 1px;
+
+	width: 100vw;
+	flex: 1 1 100%;
+}
+
+.pipeline {
+	display: grid;
+	background: #282A36;
+	grid-template: "name climate" auto "failures failures" 1fr;
+	grid-template-columns: 1fr auto;
+}
+.pipeline-name {
+	white-space: nowrap;
+	text-transform: uppercase;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	grid-area: name;
+	background: rgba(0,0,0,0.1);
+	padding: 0.33em 0.5em 0.25em;
+}
+
+.pipeline-icon {
+	font-size: 1.1em;
+	grid-area: climate;
+	background: rgba(0,0,0,0.1);
+	padding: 0.33em 0.5em 0.25em;
+}
+
+.pipeline .failed-jobs {
+	grid-area: failures;
+	display: grid;
+	grid-auto-rows: auto;
+	grid-template-columns: repeat(auto-fit, minmax(49%, 1fr));
+	align-content: space-around;
+	padding: 0.5em;
+	grid-gap: 1px;
+}
+[data-job-result] {
+	border-radius: 4px;
+	padding:0.1em;
+	font-size: 0.75em;
+}
+
+
+.job {
+	border-radius: 100px;
+	background: rgba(0,0,0,0.06);
+	display: flex;
+	align-items: center;
+	line-height: 1;
+	padding: 0.5em;
+	font-size: 0.7em;
+}
+.job-name {
+	margin-left: 1em;
+}
+.builds-ok {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+header {
+	position: relative;
+	font-size:0.3em;
+}
+
+.loader {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	display: block;
+	animation: progress 60s;
+	z-index: -1;
+	background: #6272A4;
+}
+
+@keyframes progress {
+	from {
+		width: 0;
+	}
+	to {
+		width: 100vw;
+	}
+}
+
+
+
+.score-5 {
+	background: #74DC46;
+}
+
+.score-4 {
+	background: #F4E285;
+	color: #444;
+}
+
+.score-3 {
+	background: #F7B66F;
+	color: #444;
+}
+
+.score-2 {
+	background: #FA8959;
+	color: #444;
+}
+
+.score-1 {
+	background: #FF312E;
+}

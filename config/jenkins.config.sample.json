@@ -1,0 +1,6 @@
+{
+	"host": "jenkins.org",
+	"user": "admin",
+	"password": "admin1",
+	"viewId": "my-builds"
+}
