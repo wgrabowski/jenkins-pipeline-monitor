@@ -62,18 +62,24 @@ let filterFailedJobs = function(job) {
 	});
 };
 
+function areJobsOk(failedJobs) {
+	return ! failedJobs.some(job => job.failed);
+}
+
 function formatData(data) {
 	const jobs = data.jobs
 		.filter(filterPipelineJobs)
 		.map(job => {
 				const classname = job.healthReport && job.healthReport.length ? job.healthReport[0].iconClassName : "icon-health-80plus";
 				const score = job.healthReport && job.healthReport.length ? job.healthReport[0].score : 100;
+				const failedJobs = filterFailedJobs(job);
 				return ({
 					name: formatJobDisplayName(job),
 					iconClass: healthIconClassMap[classname],
 					score: score,
 					scoreClass: scoreClassMap[classname],
-					failedJobs: filterFailedJobs(job)
+					failedJobs,
+					ok: areJobsOk(failedJobs)
 				});
 			}
 		);

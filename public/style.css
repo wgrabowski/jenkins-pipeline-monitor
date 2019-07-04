@@ -94,6 +94,7 @@ main {
 	align-items: center;
 	text-transform: uppercase;
 	font-weight: bold;
+	grid-area: failures;
 }
 
 header {
@@ -120,6 +121,14 @@ header {
 		width: 100vw;
 	}
 }
+
+[data-ok="true"]{
+	background: #74DC46;
+}
+[data-ok="false"]{
+	background: #FF312E;
+}
+
 
 
 
