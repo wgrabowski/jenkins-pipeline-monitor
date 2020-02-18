@@ -20,6 +20,6 @@
   "devDependencies": {
     "nodemon": "^1.19.1",
     "prettier": "^1.18.2",
-    "yargs": "^15.1.0"
+    "yargs": "14.2.2"
   }
 }
