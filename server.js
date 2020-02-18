@@ -1,10 +1,28 @@
 #!/usr/bin/env node
 
+const argv = require("yargs")
+	.option('c',{
+		alias: 'jenkins-config',
+		description:'Configuration file with Jenkins URL, view id and credentials',
+		default: ''
+	})
+	.option('v',{
+		alias: 'view-config',
+		description:'Configuration file for UI settings',
+		default: ''
+	})
+	.option('p',{
+		alias: 'port',
+		description:'Port on which app will listen',
+		default: 9000
+	})
+	.argv;
+const path = require("path");
 const express = require("express");
 const cors = require("cors");
 const hbs = require("hbs");
-const config = require("./config/jenkins.config");
-const viewConfig = require("./config/view.config");
+const config = require(argv.jenkinsConfig || "./config/jenkins.config.json");
+const viewConfig = require(argv.viewConfig || "./config/view.config.json");
 const app = express();
 
 app.set("view engine", "hbs");
@@ -12,7 +30,7 @@ app.use(cors());
 app.use(express.static(__dirname + "/public"));
 
 var jenkins = require("jenkins")({
-	baseUrl: `https://${config.user}:${config.password}@${config.host}`,
+	baseUrl: `http://${config.user}:${config.password}@${config.host}`,
 	promisify: true, crumbIssuer: true
 });
 
@@ -63,7 +81,7 @@ let filterFailedJobs = function(job) {
 };
 
 function areJobsOk(failedJobs) {
-	return ! failedJobs.some(job => job.failed);
+	return !failedJobs.some(job => job.failed);
 }
 
 function formatData(data) {
@@ -94,7 +112,7 @@ let getAppConfig = function() {
 	};
 };
 app.get("/", (req, res) => {
-	fetchRawViewData().then(data => res.render("main", { ...formatData(data), app: getAppConfig() }))
+	fetchRawViewData().then(data => res.render("main", { ...formatData(data), app: getAppConfig(),datetime: new Date().toLocaleTimeString('pl') }))
 		.catch(e => console.log(e));
 });
 app.get("/json", (req, res) => {
@@ -102,6 +120,6 @@ app.get("/json", (req, res) => {
 		.catch(e => console.log(e));
 });
 
-app.listen(9000);
+app.listen(argv.port || 9000);
 
 

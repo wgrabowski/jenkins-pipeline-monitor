@@ -8,7 +8,7 @@ html, body, body * {
 
 body {
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	width: 100vw;
 	height: 100vh;
 	font: 4vmin 'Source Sans Pro', sans-serif;
@@ -17,6 +17,7 @@ body {
 }
 
 header {
+	writing-mode: vertical-lr;
 	text-align: center;
 	font-size: 0.6em;
 	text-transform: uppercase;
@@ -43,20 +44,21 @@ main {
 	grid-template: "name climate" auto "failures failures" 1fr;
 	grid-template-columns: 1fr auto;
 }
+
 .pipeline-name {
 	white-space: nowrap;
 	text-transform: uppercase;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	grid-area: name;
-	background: rgba(0,0,0,0.1);
+	background: rgba(0, 0, 0, 0.1);
 	padding: 0.33em 0.5em 0.25em;
 }
 
 .pipeline-icon {
 	font-size: 1.1em;
 	grid-area: climate;
-	background: rgba(0,0,0,0.1);
+	background: rgba(0, 0, 0, 0.1);
 	padding: 0.33em 0.5em 0.25em;
 }
 
@@ -69,25 +71,28 @@ main {
 	padding: 0.5em;
 	grid-gap: 1px;
 }
+
 [data-job-result] {
 	border-radius: 4px;
-	padding:0.1em;
+	padding: 0.1em;
 	font-size: 0.75em;
 }
 
 
 .job {
 	border-radius: 100px;
-	background: rgba(0,0,0,0.06);
+	background: rgba(0, 0, 0, 0.06);
 	display: flex;
 	align-items: center;
 	line-height: 1;
 	padding: 0.5em;
 	font-size: 0.7em;
 }
+
 .job-name {
 	margin-left: 1em;
 }
+
 .builds-ok {
 	display: flex;
 	justify-content: center;
@@ -99,7 +104,15 @@ main {
 
 header {
 	position: relative;
-	font-size:0.3em;
+	transform: rotate(180deg);
+}
+
+.title {
+	font-size: 2em;
+}
+
+.timestamp {
+	font-size: 1.25em;
 }
 
 .loader {
@@ -107,6 +120,7 @@ header {
 	top: 0;
 	bottom: 0;
 	left: 0;
+	right: 0;
 	display: block;
 	animation: progress 60s;
 	z-index: -1;
@@ -115,21 +129,20 @@ header {
 
 @keyframes progress {
 	from {
-		width: 0;
+		height: 0;
 	}
 	to {
-		width: 100vw;
+		height: 100vh;
 	}
 }
 
-[data-ok="true"]{
+[data-ok="true"] {
 	background: #74DC46;
 }
-[data-ok="false"]{
+
+[data-ok="false"] {
 	background: #FF312E;
 }
-
-
 
 
 .score-5 {
